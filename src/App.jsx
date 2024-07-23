@@ -8,7 +8,7 @@ import Numero from './components/Numero';
 import Offer from './components/Offer';
 import Contrat from './components/Contrat';
 import Reclamation from './components/Reclamation';*/
-import Editprofile from './components/Editprofile';
+import EditProfile from './components/Editprofile';
 import Header from './components/Header'; 
 import Footer from './components/Footer';
 import AcheterNumero from './components/AcheterNumero';
@@ -24,7 +24,7 @@ function App() {
         
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Editprofile />} />
+            <Route path="/profile" element={<EditProfile />} />
             <Route path="/acheter-numero" element={<SimEsimForm />} />
             <Route path="/apropos" element={<AboutUs />} />
             <Route path="/offer" element={<Offers />} />

@@ -31,7 +31,7 @@ const Header = () => {
       zIndex="30"
       height="66px"
       width="full"
-      borderBottomRadius="15px"
+     // borderBottomRadius="15px"
       backgroundColor={header ? "blackAlpha.900" : "black"}
       boxShadow={header ? "lg" : "none"}
       transition="background-color 0.3s ease, box-shadow 0.3s ease"

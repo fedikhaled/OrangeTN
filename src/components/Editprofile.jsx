@@ -1,150 +1,101 @@
-import React, { useState } from 'react';
-import Footer from './Footer';
-import Header from './Header';
+import React from 'react';
 import {
+  Avatar,
   Box,
+  Button,
+  Container,
+  Flex,
   FormControl,
   FormLabel,
+  HStack,
   Input,
-  Stack,
-  Button,
+  SimpleGrid,
   Text,
-  Avatar,
+  VStack,
   IconButton,
-  Center,
-  Heading,
-  Flex,
 } from '@chakra-ui/react';
-import { FaCamera } from 'react-icons/fa';
+import { AddIcon } from '@chakra-ui/icons';
+import Header from './Header';
+import Footer from './Footer';
 
 const EditProfile = () => {
-  const [userInfo, setUserInfo] = useState({
-    utAdresse: '',
-    utCin: '',
-    utCity: '',
-    utCountry: '',
-    utFName: '',
-    utLName: '',
-    utMail: '',
-    utPassword: '',
-    utZipCode: '',
-    utImage: '',
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo((prevUserInfo) => ({
-      ...prevUserInfo,
-      [name]: value,
-    }));
-  };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        utImage: reader.result,
-      }));
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(userInfo);
-  };
-
   return (
-    <>
-      <Header />
-      <Center minHeight="100vh" bg="gray.50" p={4}>
-        <Box p={6} bg="white" shadow="md" borderWidth="1px" borderRadius="md" width="60%">
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={4}>
-              <Heading as="h2" size="lg" textAlign="left" color="orange.400" mb={6}>
-                Edit Profile
-              </Heading>
-              <Flex justify="space-between">
-                <Center>
-                  <FormControl id="utImage" textAlign="center">
-                    <Avatar size="2xl" src={userInfo.utImage} mb={4} />
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      display="none"
-                      id="image-upload"
-                    />
-                    <label htmlFor="image-upload">
-                      <IconButton
-                        as="span"
-                        icon={<FaCamera />}
-                        size="lg"
-                        variant="outline"
-                        colorScheme="orange"
-                        cursor="pointer"
-                      />
-                    </label>
-                  </FormControl>
-                </Center>
-                <Stack spacing={4} width="60%">
-                  <FormControl>
-                    <FormLabel>Name</FormLabel>
-                    <Input
-                      type="text"
-                      name="utFName"
-                      value={userInfo.utFName}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Email</FormLabel>
-                    <Input
-                      type="email"
-                      name="utMail"
-                      value={userInfo.utMail}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Phone Number</FormLabel>
-                    <Input
-                      type="text"
-                      name="utPhone"
-                      value={userInfo.utPhone}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                  <FormControl>
-                    <FormLabel>Address</FormLabel>
-                    <Input
-                      type="text"
-                      name="utAdresse"
-                      value={userInfo.utAdresse}
-                      onChange={handleInputChange}
-                    />
-                  </FormControl>
-                </Stack>
-              </Flex>
-              
-              <Flex justify="flex-end" mt={6}>
-                <Button type="submit" colorScheme="orange" size="lg" width="30%" mr={4}>
-                  Save
-                </Button>
-                <Button colorScheme="gray" size="lg" width="30%">
-                  Cancel
-                </Button>
-              </Flex>
-            </Stack>
-          </form>
-        </Box>
-      </Center>
-      <Footer />
-    </>
+    <Box>
+    <Header/>
+    <Container maxW="container.xl" p={4}>
+      <Flex bg="white" boxShadow="md" borderRadius="md" p={6}>
+        {/* Left section: Avatar and user details */}
+        <VStack align="center" spacing={4} w="20%" p={4} borderRight="1px solid #e2e8f0">
+          <Avatar size="2xl" name="John Doe" src="https://bit.ly/broken-link" />
+          <Box textAlign="center">
+            <Text fontSize="lg" fontWeight="bold">John Doe</Text>
+            <Text fontSize="sm" color="gray.500">john_doe123@bbb.com</Text>
+            <Text fontSize="sm" color="gray.500">United States</Text>
+          </Box>
+        </VStack>
+
+        {/* Middle section: Profile form */}
+        <VStack align="stretch" spacing={4} w="50%" p={4}>
+          <Text fontSize="xl" fontWeight="bold">Edit your profile</Text>
+          <SimpleGrid columns={2} spacing={4}>
+            <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input placeholder="John" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Surname</FormLabel>
+              <Input placeholder="Doe" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Headline</FormLabel>
+              <Input placeholder="UI/UX Developer" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Current Position</FormLabel>
+              <Input placeholder="UI/UX Developer at Boston" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Education</FormLabel>
+              <Input placeholder="Boston University" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Country</FormLabel>
+              <Input placeholder="USA" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>State/Region</FormLabel>
+              <Input placeholder="Boston" />
+            </FormControl>
+          </SimpleGrid>
+          <Button mt={6} colorScheme="orange" alignSelf="flex-start">Save Profile</Button>
+        </VStack>
+
+        {/* Right section: Experience */}
+        <VStack align="stretch" spacing={4} w="30%" p={4} borderLeft="1px solid #e2e8f0">
+          <Flex justify="space-between" align="center">
+            <Text fontSize="xl" fontWeight="bold">Edit Experience</Text>
+            <IconButton icon={<AddIcon />} colorScheme="orange" />
+          </Flex>
+          <Box p={4} w="full" bg="gray.50" borderRadius="md" boxShadow="sm">
+            <Text fontSize="md" fontWeight="bold">Senior UI/UX Designer</Text>
+            <Text fontSize="sm" color="gray.500">Twitter Inc.</Text>
+            <Text fontSize="sm" color="gray.500">March 2019 - May 2020</Text>
+          </Box>
+          <Box p={4} w="full" bg="gray.50" borderRadius="md" boxShadow="sm">
+            <Text fontSize="md" fontWeight="bold">Senior UI/UX Designer</Text>
+            <Text fontSize="sm" color="gray.500">Facebook Inc.</Text>
+            <Text fontSize="sm" color="gray.500">March 2017 - May 2019</Text>
+          </Box>
+          <Box p={4} w="full" bg="gray.50" borderRadius="md" boxShadow="sm">
+            <Text fontSize="md" fontWeight="bold">UI/UX Designer</Text>
+            <Text fontSize="sm" color="gray.500">Google Inc.</Text>
+            <Text fontSize="sm" color="gray.500">March 2016 - May 2017</Text>
+          </Box>
+        </VStack>
+      </Flex>
+    </Container>
+    <Footer/>
+    </Box>
   );
 };
 
