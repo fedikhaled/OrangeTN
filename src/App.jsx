@@ -11,12 +11,13 @@ import Reclamation from './components/Reclamation';*/
 import EditProfile from './components/Editprofile';
 import Header from './components/Header'; 
 import Footer from './components/Footer';
-import AcheterNumero from './components/AcheterNumero';
+import AcheterNumero from './components/AchatSimEsim';
 import Offers from './components/Offers';
 import AboutUs from './components/Apropos';
 import SignupForm from './components/Signup';
 import LoginForm from './components/Login';
 import SimEsimForm from './components/AchatSimEsim';
+import ConvertSimToEsim from './components/ConvertSimToEsim';
 function App() {
   return (
     <Router>
@@ -25,7 +26,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<EditProfile />} />
-            <Route path="/acheter-numero" element={<SimEsimForm />} />
+            <Route path="/acheter-numero" element={<AcheterNumero />} />
+            <Route path="/convertir-sim/esim" element={<ConvertSimToEsim />} />
             <Route path="/apropos" element={<AboutUs />} />
             <Route path="/offer" element={<Offers />} />
             <Route path="/signup" element={<SignupForm />} />

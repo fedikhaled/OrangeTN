@@ -10,7 +10,6 @@ import {
   HStack,
   Text,
   SimpleGrid,
-  Image,
   Tabs,
   TabList,
   TabPanels,
@@ -26,62 +25,23 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import visaImage from '../images/visa.png'; // Ensure the image path is correct
 import Header from './Header';
 import Footer from './Footer';
 
-const SimForm = ({ onNext }) => (
+const ConvertSimToEsimForm = ({ onNext }) => (
   <VStack spacing={4} align="stretch">
     <FormControl>
-      <FormLabel>Numéro de téléphone</FormLabel>
-      <Input placeholder="Entrez votre numéro de téléphone" />
+      <FormLabel>Numéro</FormLabel>
+      <Input placeholder="Entrez votre numéro" />
     </FormControl>
     <FormControl>
-      <FormLabel>Nom</FormLabel>
-      <Input placeholder="Entrez votre nom" />
+      <FormLabel>Date d'activation</FormLabel>
+      <Input placeholder="Entrez votre date d'activation" type="date" />
     </FormControl>
     <FormControl>
-      <FormLabel>Prénom</FormLabel>
-      <Input placeholder="Entrez votre prénom" />
+      <FormLabel>IMEI</FormLabel>
+      <Input placeholder="Entrez votre IMEI" />
     </FormControl>
-    <FormControl>
-      <FormLabel>Adresse</FormLabel>
-      <Input placeholder="Entrez votre adresse" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Rue</FormLabel>
-      <Input placeholder="Entrez votre rue" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>CIN</FormLabel>
-      <Input placeholder="Entrez votre CIN" />
-    </FormControl>
-    <Button colorScheme="orange" onClick={onNext}>Continuer vers le paiement</Button>
-  </VStack>
-);
-
-const EsimForm = ({ onNext }) => (
-  <VStack spacing={4} align="stretch">
-    <FormControl>
-      <FormLabel>Email</FormLabel>
-      <Input placeholder="Entrez votre email" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Nom</FormLabel>
-      <Input placeholder="Entrez votre nom" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Prénom</FormLabel>
-      <Input placeholder="Entrez votre prénom" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>CIN</FormLabel>
-      <Input placeholder="Entrez votre CIN" />
-    </FormControl>
-    <FormControl>
-    <FormLabel>imei</FormLabel>
-    <Input placeholder="Entrez votre imei" />
-  </FormControl>
     <FormControl>
       <FormLabel>Type de smartphone</FormLabel>
       <Select placeholder="Sélectionnez votre smartphone">
@@ -92,6 +52,10 @@ const EsimForm = ({ onNext }) => (
         <option value="iphone-13">iPhone 13</option>
         <option value="iphone-14">iPhone 14</option>
       </Select>
+    </FormControl>
+    <FormControl>
+      <FormLabel>Email</FormLabel>
+      <Input placeholder="Entrez votre email" />
     </FormControl>
     <Button colorScheme="orange" onClick={onNext}>Continuer vers le paiement</Button>
   </VStack>
@@ -123,8 +87,7 @@ const PaymentForm = ({ onBack, onPay }) => (
   </VStack>
 );
 
-const AcheterNumero = () => {
-  const [formType, setFormType] = useState('sim');
+const ConvertSimToEsim = () => {
   const [step, setStep] = useState('form');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
@@ -136,45 +99,18 @@ const AcheterNumero = () => {
     onOpen();
   };
 
-  const getAlertDialogBody = () => {
-    if (formType === 'sim') {
-      return 'Veuillez consulter la boutique Ooredoo près de vous pour récupérer votre SIM.';
-    } else if (formType === 'esim') {
-      return 'Consultez votre email pour récupérer vos informations eSIM.';
-    }
-    return '';
-  };
-
   return (
     <Box>
       <Header />
       <Container maxW="container.lg" p={4}>
         {step === 'form' && (
-          <Tabs variant="enclosed">
-            <TabList>
-              <Tab onClick={() => setFormType('sim')}>SIM</Tab>
-              <Tab onClick={() => setFormType('esim')}>eSIM</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <Box p={6} boxShadow="md" bg="white" borderRadius="md">
-                  <SimForm onNext={handleNext} />
-                </Box>
-              </TabPanel>
-              <TabPanel>
-                <Box p={6} boxShadow="md" bg="white" borderRadius="md">
-                  <EsimForm onNext={handleNext} />
-                </Box>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+          <Box p={6} boxShadow="md" bg="white" borderRadius="md">
+            <ConvertSimToEsimForm onNext={handleNext} />
+          </Box>
         )}
         {step === 'payment' && (
           <Box mt={6} p={6} boxShadow="md" bg="white" borderRadius="md">
             <HStack mb={4} spacing={4}>
-              <Box flex="1">
-                <Image src={visaImage} alt="Card" />
-              </Box>
               <Box flex="2">
                 <PaymentForm onBack={handleBack} onPay={handlePay} />
               </Box>
@@ -194,7 +130,7 @@ const AcheterNumero = () => {
               Confirmation de paiement
             </AlertDialogHeader>
             <AlertDialogBody>
-              {getAlertDialogBody()}
+              Consultez votre email pour récupérer vos informations eSIM.
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button colorScheme="orange" onClick={onClose}>
@@ -209,4 +145,4 @@ const AcheterNumero = () => {
   );
 };
 
-export default AcheterNumero;
+export default ConvertSimToEsim;
