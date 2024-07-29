@@ -4,7 +4,7 @@ import { Box, Flex } from '@chakra-ui/react';
 
 // Example slug data
 const slugData = ["APROPOS", "PROFILE", "NUMERO", "OFFER", "CONTRAT", "RECLAMATION"];
-const numeroSubmenu = ["Acheter Numero", "Consulter vos Numeros","convertir sim/esim","convertir esim/sim"];
+const numeroSubmenu = ["Acheter Numero",/* "Consulter vos Numeros",*/"convertir sim/esim","convertir esim/sim"];
 const profileSubmenu=["crée un compte", "se connecter"]
 
 const Nav = ({ slug }) => {

@@ -14,8 +14,8 @@ import {
   Checkbox,
   HStack,
 } from '@chakra-ui/react';
-import Footer from './Footer';
-import Header from './Header';
+import Footer from '../Footer';
+import Header from '../Header';
 
 const LoginForm = () => {
   return (

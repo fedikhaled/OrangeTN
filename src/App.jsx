@@ -7,17 +7,24 @@ import Profile from './components/Profile';
 import Numero from './components/Numero';
 import Offer from './components/Offer';
 import Contrat from './components/Contrat';
-import Reclamation from './components/Reclamation';*/
-import EditProfile from './components/Editprofile';
+import Reclamation from './components/Reclamation/Reclamation';*/
+import EditProfile from './components/Profile/Editprofile';
 import Header from './components/Header'; 
 import Footer from './components/Footer';
-import AcheterNumero from './components/AchatSimEsim';
-import Offers from './components/Offers';
-import AboutUs from './components/Apropos';
-import SignupForm from './components/Signup';
-import LoginForm from './components/Login';
-import SimEsimForm from './components/AchatSimEsim';
-import ConvertSimToEsim from './components/ConvertSimToEsim';
+import AcheterNumero from './components/Numero/AchatSimEsim';
+
+import AboutUs from './components/Apropos/Apropos';
+import SignupForm from './components/Auth/Signup';
+import LoginForm from './components/Auth/Login';
+import SimEsimForm from './components/Numero/AchatSimEsim';
+import ConvertSimToEsim from './components/Convertir/ConvertSimToEsim';
+import Reclamation from './components/Reclamation/Reclamation';
+import ConvertEsimToSim from './components/Convertir/ConvertEsimToSim';
+import ConsultList from './components/Numero/ConsultList';
+import OfferList from './components/Offres/OfferList';
+import PaymentForm from './components/Paiement/PaymentForm';
+
+
 function App() {
   return (
     <Router>
@@ -29,9 +36,15 @@ function App() {
             <Route path="/acheter-numero" element={<AcheterNumero />} />
             <Route path="/convertir-sim/esim" element={<ConvertSimToEsim />} />
             <Route path="/apropos" element={<AboutUs />} />
-            <Route path="/offer" element={<Offers />} />
+           
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/Login" element={<LoginForm />} />
+            
+            <Route path="/numero" element={<ConsultList />} />
+            <Route path="/convertir-esim/sim" element={<ConvertEsimToSim />} />
+            <Route path="/Reclamation" element={<Reclamation />} />
+            <Route path="/offer" element={<OfferList />} />
+          
             {/*<Route path="/apropos" element={<AboutUs />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/numero" element={<Numero />} />

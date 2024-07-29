@@ -26,9 +26,10 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import visaImage from '../images/visa.png'; // Ensure the image path is correct
-import Header from './Header';
-import Footer from './Footer';
+import visaImage from '../../images/visa.png'; // Ensure the image path is correct
+import Header from '../Header';
+import Footer from '../Footer';
+import PaymentForm from '../Paiement/PaymentForm';
 
 const SimForm = ({ onNext }) => (
   <VStack spacing={4} align="stretch">
@@ -79,9 +80,9 @@ const EsimForm = ({ onNext }) => (
       <Input placeholder="Entrez votre CIN" />
     </FormControl>
     <FormControl>
-    <FormLabel>imei</FormLabel>
-    <Input placeholder="Entrez votre imei" />
-  </FormControl>
+      <FormLabel>IMEI</FormLabel>
+      <Input placeholder="Entrez votre IMEI" />
+    </FormControl>
     <FormControl>
       <FormLabel>Type de smartphone</FormLabel>
       <Select placeholder="Sélectionnez votre smartphone">
@@ -94,32 +95,6 @@ const EsimForm = ({ onNext }) => (
       </Select>
     </FormControl>
     <Button colorScheme="orange" onClick={onNext}>Continuer vers le paiement</Button>
-  </VStack>
-);
-
-const PaymentForm = ({ onBack, onPay }) => (
-  <VStack spacing={4} align="stretch">
-    <Text fontSize="2xl" fontWeight="bold">Détails de paiement</Text>
-    <FormControl>
-      <FormLabel>Nom sur la carte</FormLabel>
-      <Input placeholder="Aziz Khaled" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Numéro de carte</FormLabel>
-      <Input placeholder="16 chiffres" />
-    </FormControl>
-    <SimpleGrid columns={2} spacing={4}>
-      <FormControl>
-        <FormLabel>Valide jusqu'au</FormLabel>
-        <Input placeholder="02/22" />
-      </FormControl>
-      <FormControl>
-        <FormLabel>CVV</FormLabel>
-        <Input placeholder="123" />
-      </FormControl>
-    </SimpleGrid>
-    <Button colorScheme="orange" w="full" onClick={onPay}>PAYER</Button>
-    <Button variant="outline" onClick={onBack}>Retour au formulaire</Button>
   </VStack>
 );
 

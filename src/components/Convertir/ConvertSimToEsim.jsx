@@ -25,19 +25,16 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../Header';
+import Footer from '../Footer';
 
-const ConvertSimToEsimForm = ({ onNext }) => (
+const ConvertSimToEsimForm = ({ onSubmit }) => (
   <VStack spacing={4} align="stretch">
     <FormControl>
       <FormLabel>Numéro</FormLabel>
       <Input placeholder="Entrez votre numéro" />
     </FormControl>
-    <FormControl>
-      <FormLabel>Date d'activation</FormLabel>
-      <Input placeholder="Entrez votre date d'activation" type="date" />
-    </FormControl>
+   
     <FormControl>
       <FormLabel>IMEI</FormLabel>
       <Input placeholder="Entrez votre IMEI" />
@@ -53,49 +50,15 @@ const ConvertSimToEsimForm = ({ onNext }) => (
         <option value="iphone-14">iPhone 14</option>
       </Select>
     </FormControl>
-    <FormControl>
-      <FormLabel>Email</FormLabel>
-      <Input placeholder="Entrez votre email" />
-    </FormControl>
-    <Button colorScheme="orange" onClick={onNext}>Continuer vers le paiement</Button>
-  </VStack>
-);
-
-const PaymentForm = ({ onBack, onPay }) => (
-  <VStack spacing={4} align="stretch">
-    <Text fontSize="2xl" fontWeight="bold">Détails de paiement</Text>
-    <FormControl>
-      <FormLabel>Nom sur la carte</FormLabel>
-      <Input placeholder="Aziz Khaled" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Numéro de carte</FormLabel>
-      <Input placeholder="16 chiffres" />
-    </FormControl>
-    <SimpleGrid columns={2} spacing={4}>
-      <FormControl>
-        <FormLabel>Valide jusqu'au</FormLabel>
-        <Input placeholder="02/22" />
-      </FormControl>
-      <FormControl>
-        <FormLabel>CVV</FormLabel>
-        <Input placeholder="123" />
-      </FormControl>
-    </SimpleGrid>
-    <Button colorScheme="orange" w="full" onClick={onPay}>PAYER</Button>
-    <Button variant="outline" onClick={onBack}>Retour au formulaire</Button>
+    <Button colorScheme="orange" onClick={onSubmit}>Soumettre</Button>
   </VStack>
 );
 
 const ConvertSimToEsim = () => {
-  const [step, setStep] = useState('form');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
-  const handleNext = () => setStep('payment');
-  const handleBack = () => setStep('form');
-
-  const handlePay = () => {
+  const handleSubmit = () => {
     onOpen();
   };
 
@@ -103,20 +66,9 @@ const ConvertSimToEsim = () => {
     <Box>
       <Header />
       <Container maxW="container.lg" p={4}>
-        {step === 'form' && (
-          <Box p={6} boxShadow="md" bg="white" borderRadius="md">
-            <ConvertSimToEsimForm onNext={handleNext} />
-          </Box>
-        )}
-        {step === 'payment' && (
-          <Box mt={6} p={6} boxShadow="md" bg="white" borderRadius="md">
-            <HStack mb={4} spacing={4}>
-              <Box flex="2">
-                <PaymentForm onBack={handleBack} onPay={handlePay} />
-              </Box>
-            </HStack>
-          </Box>
-        )}
+        <Box p={6} boxShadow="md" bg="white" borderRadius="md">
+          <ConvertSimToEsimForm onSubmit={handleSubmit} />
+        </Box>
       </Container>
       <AlertDialog
         isOpen={isOpen}
@@ -127,10 +79,10 @@ const ConvertSimToEsim = () => {
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold" display="flex" alignItems="center">
               <CheckCircleIcon color="green.500" mr={2} />
-              Confirmation de paiement
+              Succès !
             </AlertDialogHeader>
             <AlertDialogBody>
-              Consultez votre email pour récupérer vos informations eSIM.
+              Consultez votre boite mail pour récupérer vos informations eSIM.
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button colorScheme="orange" onClick={onClose}>
