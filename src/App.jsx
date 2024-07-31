@@ -12,6 +12,7 @@ import EditProfile from './components/Profile/Editprofile';
 import Header from './components/Header'; 
 import Footer from './components/Footer';
 import AcheterNumero from './components/Numero/AchatSimEsim';
+import ContratList from './components/Contrats/ContratList';
 
 import AboutUs from './components/Apropos/Apropos';
 import SignupForm from './components/Auth/Signup';
@@ -35,6 +36,7 @@ function App() {
             <Route path="/profile" element={<EditProfile />} />
             <Route path="/acheter-numero" element={<AcheterNumero />} />
             <Route path="/convertir-sim/esim" element={<ConvertSimToEsim />} />
+            <Route path="/contrat" element={<ContratList />} />
             <Route path="/apropos" element={<AboutUs />} />
            
             <Route path="/signup" element={<SignupForm />} />
