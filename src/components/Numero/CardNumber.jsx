@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, HStack, VStack, Text, Image } from '@chakra-ui/react';
 import puce from '../../images/puce.jpeg'; // Ensure the image path is correct
 
-const Card = ({ phone }) => {
+const CardNumber = ({ phone }) => {
   return (
     <Box
       key={phone.id}
@@ -22,10 +22,17 @@ const Card = ({ phone }) => {
           <Text>Date d'activation: {phone.activationDate}</Text>
           <Text>Code PUK: {phone.pukCode}</Text>
           <Text>Code PIN: {phone.pinCode}</Text>
+          {phone.type === 'SIM' && <Text>Numéro de série: {phone.serialNumber}</Text>}
+          {phone.type === 'eSIM' && (
+            <>
+              <Text>IMEI: {phone.imei}</Text>
+              <Text>Type de smartphone: {phone.smartphoneType}</Text>
+            </>
+          )}
         </VStack>
       </HStack>
     </Box>
   );
 };
 
-export default Card;
+export default CardNumber;

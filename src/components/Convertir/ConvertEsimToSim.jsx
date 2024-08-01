@@ -7,14 +7,6 @@ import {
   FormLabel,
   Input,
   VStack,
-  HStack,
-  Text,
-  SimpleGrid,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   useDisclosure,
   AlertDialog,
   AlertDialogBody,
@@ -22,24 +14,21 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  Select,
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import Header from '../Header';
 import Footer from '../Footer';
 
 const ConvertSimToEsimForm = ({ onSubmit }) => (
-  <VStack spacing={4} align="stretch" >
+  <VStack spacing={4} align="stretch">
     <FormControl>
       <FormLabel>Numéro</FormLabel>
       <Input placeholder="Entrez votre numéro" />
     </FormControl>
     <FormControl>
-      <FormLabel>Date d'activation</FormLabel>
-      <Input placeholder="Entrez votre date d'activation" type="date" />
+      <FormLabel>IMEI</FormLabel>
+      <Input placeholder="Entrez votre IMEI" />
     </FormControl>
-
-
     <Button colorScheme="orange" onClick={onSubmit}>Soumettre</Button>
   </VStack>
 );
@@ -72,8 +61,8 @@ const ConvertEsimToSim = () => {
               Succès !
             </AlertDialogHeader>
             <AlertDialogBody>
-            Veuillez consulter la boutique Ooredoo près de vous pour récupérer votre SIM.
-                        </AlertDialogBody>
+              Veuillez consulter la boutique Orange près de vous pour récupérer votre SIM.
+            </AlertDialogBody>
             <AlertDialogFooter>
               <Button colorScheme="orange" onClick={onClose}>
                 OK

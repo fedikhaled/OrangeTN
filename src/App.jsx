@@ -45,7 +45,7 @@ function App() {
             <Route path="/numero" element={<ConsultList />} />
             <Route path="/convertir-esim/sim" element={<ConvertEsimToSim />} />
             <Route path="/Reclamation" element={<Reclamation />} />
-            <Route path="/offer" element={<OfferList />} />
+            <Route path="/Offres" element={<OfferList />} />
           
             {/*<Route path="/apropos" element={<AboutUs />} />
             <Route path="/profile" element={<Profile />} />

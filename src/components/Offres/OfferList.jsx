@@ -7,9 +7,7 @@ import {
   Button,
   HStack,
   Tabs,
-  TabList,
   TabPanels,
-  Tab,
   TabPanel,
   VStack,
   FormControl,
@@ -23,15 +21,15 @@ import CardOffer from './CardOffer';
 import visaImage from '../../images/visa.png'; // Ensure the image path is correct
 
 const offers = [
-  { id: 1, data: 100, price: 72, validity: 60, isNew: true },
-  { id: 2, data: 75, price: 60, validity: 60, isNew: true },
-  { id: 3, data: 55, price: 55, validity: 30, isNew: false },
-  { id: 4, data: 30, price: 30, validity: 30, isNew: false },
-  { id: 5, data: 25, price: 22.5, validity: 30, isNew: false },
-  { id: 6, data: 20, price: 18, validity: 30, isNew: false },
-  { id: 7, data: 15, price: 15, validity: 30, isNew: false },
-  { id: 8, data: 10, price: 10, validity: 30, isNew: false },
-  { id: 9, data: 5, price: 5, validity: 30, isNew: false },
+  { id: 1, nom: 'Offre 100 Go', desc: 'Description de l\'offre 100 Go', prix: 72, type_service: 'Internet Mobile', service_name: '100 Go', duree_expiration: 60, },
+  { id: 2, nom: 'Offre 75 Go', desc: 'Description de l\'offre 75 Go', prix: 60, type_service: 'Internet Mobile', service_name: '75 Go', duree_expiration: 60,  },
+  { id: 3, nom: 'Offre 55 Go', desc: 'Description de l\'offre 55 Go', prix: 55, type_service: 'Internet Mobile', service_name: '55 Go', duree_expiration: 30,  },
+  { id: 4, nom: 'Offre 30 Go', desc: 'Description de l\'offre 30 Go', prix: 30, type_service: 'Internet Mobile', service_name: '30 Go', duree_expiration: 30, },
+  { id: 5, nom: 'Offre 25 Go', desc: 'Description de l\'offre 25 Go', prix: 22.5, type_service: 'Internet Mobile', service_name: '25 Go', duree_expiration: 30, },
+  { id: 6, nom: 'Offre 20 Go', desc: 'Description de l\'offre 20 Go', prix: 18, type_service: 'Internet Mobile', service_name: '20 Go', duree_expiration: 30, },
+  { id: 7, nom: 'Offre 15 Go', desc: 'Description de l\'offre 15 Go', prix: 15, type_service: 'Internet Mobile', service_name: '15 Go', duree_expiration: 30, },
+  { id: 8, nom: 'Offre 10 Go', desc: 'Description de l\'offre 10 Go', prix: 10, type_service: 'Internet Mobile', service_name: '10 Go', duree_expiration: 30,},
+  { id: 9, nom: 'Offre 5 Go', desc: 'Description de l\'offre 5 Go', prix: 5, type_service: 'Internet Mobile', service_name: '5 Go', duree_expiration: 30, },
 ];
 
 const itemsPerPage = 5;
@@ -93,7 +91,6 @@ const OfferList = () => {
       <Header />
       <Container maxW="container.lg" py={10}>
         <Tabs index={tabIndex} onChange={setTabIndex} variant="enclosed">
-          
           <TabPanels>
             <TabPanel>
               <Text fontSize="2xl" fontWeight="bold" mb={6} textAlign="center">

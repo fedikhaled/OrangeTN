@@ -7,14 +7,6 @@ import {
   FormLabel,
   Input,
   VStack,
-  HStack,
-  Text,
-  SimpleGrid,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   useDisclosure,
   AlertDialog,
   AlertDialogBody,
@@ -34,7 +26,10 @@ const ConvertSimToEsimForm = ({ onSubmit }) => (
       <FormLabel>Numéro</FormLabel>
       <Input placeholder="Entrez votre numéro" />
     </FormControl>
-   
+    <FormControl>
+      <FormLabel>Numéro de série</FormLabel>
+      <Input placeholder="Entrez votre numéro de série" />
+    </FormControl>
     <FormControl>
       <FormLabel>IMEI</FormLabel>
       <Input placeholder="Entrez votre IMEI" />
@@ -82,7 +77,7 @@ const ConvertSimToEsim = () => {
               Succès !
             </AlertDialogHeader>
             <AlertDialogBody>
-              Consultez votre boite mail pour récupérer vos informations eSIM.
+              Succés !
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button colorScheme="orange" onClick={onClose}>

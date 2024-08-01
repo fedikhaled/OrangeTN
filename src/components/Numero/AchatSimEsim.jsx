@@ -34,28 +34,8 @@ import PaymentForm from '../Paiement/PaymentForm';
 const SimForm = ({ onNext }) => (
   <VStack spacing={4} align="stretch">
     <FormControl>
-      <FormLabel>Numéro de téléphone</FormLabel>
-      <Input placeholder="Entrez votre numéro de téléphone" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Nom</FormLabel>
-      <Input placeholder="Entrez votre nom" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Prénom</FormLabel>
-      <Input placeholder="Entrez votre prénom" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Adresse</FormLabel>
-      <Input placeholder="Entrez votre adresse" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Rue</FormLabel>
-      <Input placeholder="Entrez votre rue" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>CIN</FormLabel>
-      <Input placeholder="Entrez votre CIN" />
+      <FormLabel>Adresse actuelle</FormLabel>
+      <Input placeholder="Entrez votre adresse actuelle" />
     </FormControl>
     <Button colorScheme="orange" onClick={onNext}>Continuer vers le paiement</Button>
   </VStack>
@@ -63,22 +43,6 @@ const SimForm = ({ onNext }) => (
 
 const EsimForm = ({ onNext }) => (
   <VStack spacing={4} align="stretch">
-    <FormControl>
-      <FormLabel>Email</FormLabel>
-      <Input placeholder="Entrez votre email" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Nom</FormLabel>
-      <Input placeholder="Entrez votre nom" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>Prénom</FormLabel>
-      <Input placeholder="Entrez votre prénom" />
-    </FormControl>
-    <FormControl>
-      <FormLabel>CIN</FormLabel>
-      <Input placeholder="Entrez votre CIN" />
-    </FormControl>
     <FormControl>
       <FormLabel>IMEI</FormLabel>
       <Input placeholder="Entrez votre IMEI" />
@@ -113,9 +77,9 @@ const AcheterNumero = () => {
 
   const getAlertDialogBody = () => {
     if (formType === 'sim') {
-      return 'Veuillez consulter la boutique Ooredoo près de vous pour récupérer votre SIM.';
+      return 'Veuillez consulter la boutique Orange près de vous pour récupérer votre SIM.';
     } else if (formType === 'esim') {
-      return 'Consultez votre email pour récupérer vos informations eSIM.';
+      return 'Succés !';
     }
     return '';
   };

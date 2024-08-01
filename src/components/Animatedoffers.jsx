@@ -77,12 +77,12 @@ const Animatedoffers = () => {
       <Box width="50%" maxWidth="1200px" mx="auto" position="relative">
         <Slider {...settings}>
           {slides.map((slide) => (
-            <Box key={slide.id} position="relative" width="100%">
+            <Box key={slide.id} position="relative" >
               <Image
                 src={slide.src}
                 alt={slide.alt}
                 width="100%"
-                height="auto"
+               
                 objectFit="cover"
               />
               {/*

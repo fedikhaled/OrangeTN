@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import Header from '../Header';
 import Footer from '../Footer';
-import Card from './CardNumber';
+import CardNumber from './CardNumber';
 
 const phoneNumbers = [
   {
@@ -23,6 +23,7 @@ const phoneNumbers = [
     activationDate: '2023-01-01',
     pukCode: '12345678',
     pinCode: '1234',
+    serialNumber: 'SN1234567890',
   },
   {
     id: 2,
@@ -31,6 +32,8 @@ const phoneNumbers = [
     activationDate: '2023-02-01',
     pukCode: '87654321',
     pinCode: '4321',
+    imei: 'IMEI123456789012',
+    smartphoneType: 'iPhone 13',
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ const phoneNumbers = [
     activationDate: '2023-03-01',
     pukCode: '11223344',
     pinCode: '5678',
+    serialNumber: 'SN0987654321',
   },
   {
     id: 4,
@@ -47,6 +51,8 @@ const phoneNumbers = [
     activationDate: '2023-04-01',
     pukCode: '55667788',
     pinCode: '8765',
+    imei: 'IMEI098765432109',
+    smartphoneType: 'Galaxy S21',
   },
   {
     id: 5,
@@ -55,6 +61,7 @@ const phoneNumbers = [
     activationDate: '2023-05-01',
     pukCode: '99887766',
     pinCode: '4321',
+    serialNumber: 'SN5678901234',
   },
   {
     id: 6,
@@ -63,8 +70,9 @@ const phoneNumbers = [
     activationDate: '2023-06-01',
     pukCode: '22334455',
     pinCode: '1234',
+    imei: 'IMEI112233445566',
+    smartphoneType: 'Galaxy S22',
   },
-  // Add more entries as needed
 ];
 
 const ConsultList = () => {
@@ -123,7 +131,7 @@ const ConsultList = () => {
         </Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
           {currentItems.map((phone) => (
-            <Card key={phone.id} phone={phone} />
+            <CardNumber key={phone.id} phone={phone} />
           ))}
         </SimpleGrid>
         <HStack justifyContent="center" mt={6}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, VStack, Badge, Button } from '@chakra-ui/react';
+import { Box, Text, VStack, Badge, Button, Tooltip } from '@chakra-ui/react';
 
 const CardOffer = ({ offer, onAcheterClick }) => {
   return (
@@ -13,25 +13,24 @@ const CardOffer = ({ offer, onAcheterClick }) => {
       w="200px"
     >
       <VStack spacing={3}>
-        <Text fontSize="lg" fontWeight="bold" color="orange.500">
-          Option
-        </Text>
+        <Tooltip label={offer.desc} fontSize="md">
+          <Text fontSize="lg" fontWeight="bold" color="orange.500">
+            {offer.nom}
+          </Text>
+        </Tooltip>
         <Text fontSize="sm" color="gray.500">
-          Internet Mobile
+          {offer.type_service}
         </Text>
-        <Text fontSize="sm" color="gray.500" fontWeight="bold">
-          *124#
-        </Text>
-        <Text fontSize="3xl" fontWeight="bold" color="orange.500">
-          {offer.data} Go
+        <Text fontSize="xl" fontWeight="bold" color="orange.500">
+          {offer.service_name}
         </Text>
         <Text fontSize="xl" fontWeight="bold" color="black">
-          {offer.price} DT
+          {offer.prix} DT
         </Text>
         <Text fontSize="sm" color="gray.500">
-          Valable {offer.validity} jours
+          Valable {offer.duree_expiration} jours
         </Text>
-        {offer.isNew && <Badge colorScheme="green">NOUVEAU</Badge>}
+       
         <Button colorScheme="orange" variant="solid" size="sm" mt={4} onClick={onAcheterClick}>
           Acheter
         </Button>
