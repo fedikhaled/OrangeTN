@@ -24,6 +24,13 @@ import ConvertEsimToSim from './components/Convertir/ConvertEsimToSim';
 import ConsultList from './components/Numero/ConsultList';
 import OfferList from './components/Offres/OfferList';
 import PaymentForm from './components/Paiement/PaymentForm';
+//admin 
+
+//sidebar
+import Sidebar from './Admin/Sidebar'; 
+// gerer clients
+import GererClients from './Admin/ManageClients';
+import AdminDashboard from './Admin/Dashboard';
 
 
 function App() {
@@ -38,7 +45,10 @@ function App() {
             <Route path="/convertir-sim/esim" element={<ConvertSimToEsim />} />
             <Route path="/contrat" element={<ContratList />} />
             <Route path="/apropos" element={<AboutUs />} />
-           
+            <Route path="/sidebar" element={<Sidebar />} />
+            
+            
+            <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/Login" element={<LoginForm />} />
             
@@ -48,6 +58,8 @@ function App() {
             <Route path="/Offres" element={<OfferList />} />
           
             {/*<Route path="/apropos" element={<AboutUs />} />
+
+              <Route path="/gererclient" element={<GererClients />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/numero" element={<Numero />} />
             <Route path="/offer" element={<Offer />} />
