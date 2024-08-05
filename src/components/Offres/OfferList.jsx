@@ -14,6 +14,14 @@ import {
   FormLabel,
   Input,
   Image,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
 } from '@chakra-ui/react';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -63,6 +71,8 @@ const PaymentForm = ({ onBack }) => (
 const OfferList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [tabIndex, setTabIndex] = useState(0);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const totalPages = Math.ceil(offers.length / itemsPerPage);
 
@@ -79,7 +89,13 @@ const OfferList = () => {
   const currentItems = offers.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleAcheterClick = () => {
+    onOpen();
+  };
+
+  const handleSubmitPhoneNumber = () => {
+    // Process phone number here (if needed)
     setTabIndex(1);
+    onClose();
   };
 
   const handleBackToOffers = () => {
@@ -127,6 +143,35 @@ const OfferList = () => {
             </TabPanel>
           </TabPanels>
         </Tabs>
+
+        {/* Modal for entering phone number */}
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Entrez votre numéro de téléphone</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <FormControl>
+                <FormLabel>Numéro de téléphone</FormLabel>
+                <Input
+                  placeholder="Entrez votre numéro"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </FormControl>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="orange" onClick={handleSubmitPhoneNumber}>
+                Soumettre
+              </Button>
+              <Button variant="ghost" onClick={onClose} ml={3}>
+                Annuler
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
       </Container>
       <Footer />
     </Box>
