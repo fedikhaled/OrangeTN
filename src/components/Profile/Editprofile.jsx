@@ -71,7 +71,7 @@ const EditProfile = () => {
               </FormControl>
               <FormControl>
                 <FormLabel>Prénom</FormLabel>
-                <Input placeholder="Entrez votre prénom" />
+                <Input  placeholder="Entrez votre prénom" />
               </FormControl>
               <FormControl>
                 <FormLabel>CIN</FormLabel>

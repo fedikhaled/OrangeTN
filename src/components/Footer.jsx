@@ -87,23 +87,24 @@ const Footer = () => {
                     </Stack>
 
                     <Stack spacing={6}>
-                        <Text>Appareils</Text>
-                        <Link href="#">Tous les mobiles</Link>
+                        <Text>Offres</Text>
+                        <Link href="#">Tous les offres</Link>
                         <Link href="#">Tous les accessoires</Link>
                     </Stack>
 
                     <Stack spacing={6}>
-                        <Text>Réseaux</Text>
-                        <Link href="#">Couverture mobile</Link>
-                        <Link href="#">Couverture Fixbox</Link>
+                        <Text>Numero</Text>
+                        <Link href="#">SIM</Link>
+                        <Link href="#">eSIM</Link>
+                        <Link href="#">Changer status </Link>
                     </Stack>
 
                     <Stack spacing={6}>
                         <Text>Services</Text>
-                        <Link href="#">Orange fidélité</Link>
-                        <Link href="#">Assistance</Link>
-                        <Link href="#">Orange place</Link>
-                        <Link href="#">Services pratiques</Link>
+                        <Link href="#">Service internet</Link>
+                        <Link href="#">Service appel</Link>
+                        <Link href="#">Service SMS</Link>
+                       
                     </Stack>
                 </Flex>
 
