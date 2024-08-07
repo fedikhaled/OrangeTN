@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Tabs, 
-  TabList, 
-  TabPanels, 
-  Tab, 
-  TabPanel, 
-  useToast, 
-  useDisclosure, 
-  VStack, 
-  Text 
+import {
+  Box,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  useToast,
+  useDisclosure,
+  VStack,
+  Text,
 } from '@chakra-ui/react';
 import ReclamationTable from './ReclamationTable';
 import ReclamationFilters from './ReclamationFilters';
 import { ReplyModal, DeleteModal } from './ReclamationActions';
 
-const initialReclamations = [
+export const initialReclamations = [
   {
     id: 1,
     description: "Problème avec la connexion Internet.",
@@ -25,7 +25,18 @@ const initialReclamations = [
       nom: 'Aziz',
       prenom: 'Khaled',
       cin: '12345678',
-    }
+    },
+  },
+  {
+    id: 1,
+    description: "Problème avec la connexion Internet.",
+    date: "2024-08-01",
+    statut: "En attente",
+    user: {
+      nom: 'Aziz',
+      prenom: 'Khaled',
+      cin: '12345678',
+    },
   },
   {
     id: 2,
@@ -36,31 +47,41 @@ const initialReclamations = [
       nom: 'Fedi',
       prenom: 'Khaled',
       cin: '87654321',
-    }
+    },
   },
   // Add more reclamations here
 ];
 
 const GestionReclamations = () => {
-  const [activeReclamations, setActiveReclamations] = useState(initialReclamations.filter(r => r.statut !== "Résolu"));
-  const [archivedReclamations, setArchivedReclamations] = useState(initialReclamations.filter(r => r.statut === "Résolu"));
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterDate, setFilterDate] = useState("");
-  const [filterStatus, setFilterStatus] = useState("Toutes");
+  const [activeReclamations, setActiveReclamations] = useState(
+    initialReclamations.filter((r) => r.statut !== 'Résolu')
+  );
+  const [archivedReclamations, setArchivedReclamations] = useState(
+    initialReclamations.filter((r) => r.statut === 'Résolu')
+  );
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterDate, setFilterDate] = useState('');
+  const [filterStatus, setFilterStatus] = useState('Toutes');
   const [showMore, setShowMore] = useState({});
   const [selectedReclamation, setSelectedReclamation] = useState(null);
   const [response, setResponse] = useState('');
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { isOpen: isReplyOpen, onOpen: onReplyOpen, onClose: onReplyClose } = useDisclosure();
+  const {
+    isOpen: isReplyOpen,
+    onOpen: onReplyOpen,
+    onClose: onReplyClose,
+  } = useDisclosure();
 
   const handleDeleteReclamation = (id) => {
-    setActiveReclamations(activeReclamations.filter(reclamation => reclamation.id !== id));
+    setActiveReclamations(
+      activeReclamations.filter((reclamation) => reclamation.id !== id)
+    );
     onClose();
     toast({
-      title: "Réclamation supprimée.",
-      description: "La réclamation a été supprimée avec succès.",
-      status: "success",
+      title: 'Réclamation supprimée.',
+      description: 'La réclamation a été supprimée avec succès.',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
@@ -69,42 +90,50 @@ const GestionReclamations = () => {
   const handleSendResponse = () => {
     if (response.trim() === '') {
       toast({
-        title: "Erreur",
-        description: "Le message ne peut pas être vide.",
-        status: "error",
+        title: 'Erreur',
+        description: 'Le message ne peut pas être vide.',
+        status: 'error',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
 
-    setActiveReclamations(activeReclamations.map(reclamation => 
-      reclamation.id === selectedReclamation.id 
-        ? { ...reclamation, statut: "Résolu" } 
-        : reclamation
-    ));
-    
-    const resolvedReclamation = activeReclamations.find(reclamation => reclamation.id === selectedReclamation.id);
+    setActiveReclamations(
+      activeReclamations.map((reclamation) =>
+        reclamation.id === selectedReclamation.id
+          ? { ...reclamation, statut: 'Résolu' }
+          : reclamation
+      )
+    );
+
+    const resolvedReclamation = activeReclamations.find(
+      (reclamation) => reclamation.id === selectedReclamation.id
+    );
     setArchivedReclamations([...archivedReclamations, resolvedReclamation]);
 
-    setActiveReclamations(activeReclamations.filter(reclamation => reclamation.id !== selectedReclamation.id));
+    setActiveReclamations(
+      activeReclamations.filter(
+        (reclamation) => reclamation.id !== selectedReclamation.id
+      )
+    );
 
     onReplyClose();
     toast({
-      title: "Réclamation résolue.",
-      description: "La réclamation a été marquée comme résolue et archivée.",
-      status: "success",
+      title: 'Réclamation résolue.',
+      description: 'La réclamation a été marquée comme résolue et archivée.',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
   };
 
-  const filteredReclamations = activeReclamations.filter(reclamation => {
+  const filteredReclamations = activeReclamations.filter((reclamation) => {
     return (
-      (filterStatus === "Toutes" || reclamation.statut === filterStatus) &&
-      (filterDate === "" || reclamation.date === filterDate) &&
+      (filterStatus === 'Toutes' || reclamation.statut === filterStatus) &&
+      (filterDate === '' || reclamation.date === filterDate) &&
       (reclamation.user.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
-       reclamation.user.prenom.toLowerCase().includes(searchTerm.toLowerCase()))
+        reclamation.user.prenom.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
 
@@ -152,8 +181,14 @@ const GestionReclamations = () => {
           </TabPanel>
           <TabPanel>
             <VStack align="stretch" spacing={4}>
-              {archivedReclamations.map(reclamation => (
-                <Box key={reclamation.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+              {archivedReclamations.map((reclamation) => (
+                <Box
+                  key={reclamation.id}
+                  p={4}
+                  borderWidth="1px"
+                  borderRadius="md"
+                  boxShadow="md"
+                >
                   <Text fontWeight="bold">Date: {reclamation.date}</Text>
                   <Text>Description: {reclamation.description}</Text>
                   <Text>Nom: {reclamation.user.nom}</Text>
