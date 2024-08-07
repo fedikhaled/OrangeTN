@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import GererClients from './ManageClients';
 import GestionContrats from './GestionContrats';
 import GestionOffres from './GestionOffres';
-import GestionReclamations from './GestionReclamations';
+import GestionReclamations from './Reclamation/GestionReclamations';
 
 const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState('');
