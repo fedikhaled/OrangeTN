@@ -17,12 +17,11 @@ import {
   Tr,
   Th,
   Td,
-  Tag,
   IconButton,
   Input,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaEdit, FaPlus } from 'react-icons/fa';
 
 const initialOffres = [
   { id: 1, nom: 'Offre 100 Go', description: 'Accès Internet 100 Go', prix: '72 DT', duree: '30 jours' },
@@ -35,6 +34,8 @@ const GestionOffres = () => {
   const [showMore, setShowMore] = useState({});
   const [selectedOffre, setSelectedOffre] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
+  const { isOpen: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure();
   const toast = useToast();
 
   const handleOpenDeleteModal = (offre) => {
@@ -61,11 +62,37 @@ const GestionOffres = () => {
     }));
   };
 
+  const handleCreateOffre = (newOffre) => {
+    setOffres([...offres, { ...newOffre, id: offres.length + 1 }]);
+    onCreateClose();
+    toast({
+      title: 'Offre créée.',
+      description: 'La nouvelle offre a été créée avec succès.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
+  const handleEditOffre = (updatedOffre) => {
+    setOffres(offres.map(offre => (offre.id === updatedOffre.id ? updatedOffre : offre)));
+    onEditClose();
+    toast({
+      title: 'Offre mise à jour.',
+      description: 'L\'offre a été mise à jour avec succès.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   return (
     <Box p={4}>
       <HStack spacing={4} mb={6}>
-        <Input placeholder="Rechercher par nom..." />
-        <Input placeholder="Filtrer par prix" />
+        
+        <Button leftIcon={<FaPlus />} colorScheme="green" onClick={onCreateOpen}>
+          Ajouter une offre
+        </Button>
       </HStack>
 
       <Box bg="white" boxShadow="sm" borderRadius="md" overflowX="auto">
@@ -103,9 +130,18 @@ const GestionOffres = () => {
                 <Td>
                   <HStack spacing={2}>
                     <IconButton
+                      icon={<FaEdit />}
+                      colorScheme="blue"
+                      aria-label="Modifier l'offre"
+                      onClick={() => {
+                        setSelectedOffre(offre);
+                        onEditOpen();
+                      }}
+                    />
+                    <IconButton
                       icon={<FaTrash />}
                       colorScheme="red"
-                      aria-label="Delete offer"
+                      aria-label="Supprimer l'offre"
                       onClick={() => handleOpenDeleteModal(offre)}
                     />
                   </HStack>
@@ -134,7 +170,115 @@ const GestionOffres = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      {/* Modal for Creating Offer */}
+      <CreateEditOffreModal
+        isOpen={isCreateOpen}
+        onClose={onCreateClose}
+        onSubmit={handleCreateOffre}
+        initialData={{ nom: '', description: '', prix: '', duree: '' }}
+        title="Créer une nouvelle offre"
+      />
+
+      {/* Modal for Editing Offer */}
+      <CreateEditOffreModal
+        isOpen={isEditOpen}
+        onClose={onEditClose}
+        onSubmit={handleEditOffre}
+        initialData={selectedOffre || { nom: '', description: '', prix: '', duree: '' }}
+        title="Modifier l'offre"
+      />
     </Box>
+  );
+};
+
+const CreateEditOffreModal = ({ isOpen, onClose, onSubmit, initialData, title }) => {
+  const [formData, setFormData] = useState(initialData);
+  const toast = useToast();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    // Validation: Ensure all fields are filled and price is a number
+    if (!formData.nom || !formData.description || !formData.prix || !formData.duree) {
+      toast({
+        title: 'Erreur',
+        description: 'Tous les champs doivent être remplis.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (isNaN(formData.prix)) {
+      toast({
+        title: 'Erreur',
+        description: 'Le prix doit être un nombre.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    onSubmit({ ...formData, prix: `${formData.prix} DT` });
+    onClose();
+  };
+
+  // Update the form data when initialData changes
+  React.useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>{title}</ModalHeader>
+        <ModalBody>
+          <Input
+            name="nom"
+            placeholder="Nom de l'offre"
+            value={formData.nom}
+            onChange={handleChange}
+            mb={3}
+          />
+          <Input
+            name="description"
+            placeholder="Description de l'offre"
+            value={formData.description}
+            onChange={handleChange}
+            mb={3}
+          />
+          <Input
+            name="prix"
+            placeholder="Prix de l'offre"
+            value={formData.prix}
+            onChange={handleChange}
+            mb={3}
+          />
+          <Input
+            name="duree"
+            placeholder="Durée de l'offre"
+            value={formData.duree}
+            onChange={handleChange}
+            mb={3}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="blue" onClick={handleSubmit}>
+            Sauvegarder
+          </Button>
+          <Button variant="ghost" onClick={onClose} ml={3}>
+            Annuler
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

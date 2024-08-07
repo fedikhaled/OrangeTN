@@ -28,17 +28,6 @@ export const initialReclamations = [
     },
   },
   {
-    id: 1,
-    description: "Problème avec la connexion Internet.",
-    date: "2024-08-01",
-    statut: "En attente",
-    user: {
-      nom: 'Aziz',
-      prenom: 'Khaled',
-      cin: '12345678',
-    },
-  },
-  {
     id: 2,
     description: "Facture incorrecte pour le mois dernier.",
     date: "2024-08-02",
@@ -49,7 +38,17 @@ export const initialReclamations = [
       cin: '87654321',
     },
   },
-  // Add more reclamations here
+  {
+    id: 3,
+    description: "Connexion lente pendant les heures de pointe.",
+    date: "2024-08-03",
+    statut: "En attente",
+    user: {
+      nom: 'Ines',
+      prenom: 'Bouejla',
+      cin: '98765432',
+    },
+  },
 ];
 
 const GestionReclamations = () => {
@@ -99,26 +98,30 @@ const GestionReclamations = () => {
       return;
     }
 
-    setActiveReclamations(
-      activeReclamations.map((reclamation) =>
-        reclamation.id === selectedReclamation.id
-          ? { ...reclamation, statut: 'Résolu' }
-          : reclamation
-      )
+    // Update the status to "Résolu"
+    const updatedReclamations = activeReclamations.map((reclamation) =>
+      reclamation.id === selectedReclamation.id
+        ? { ...reclamation, statut: 'Résolu' }
+        : reclamation
     );
 
-    const resolvedReclamation = activeReclamations.find(
-      (reclamation) => reclamation.id === selectedReclamation.id
-    );
-    setArchivedReclamations([...archivedReclamations, resolvedReclamation]);
-
+    // Filter out the resolved reclamation from activeReclamations and add it to archivedReclamations
     setActiveReclamations(
-      activeReclamations.filter(
+      updatedReclamations.filter(
         (reclamation) => reclamation.id !== selectedReclamation.id
       )
     );
 
+    const resolvedReclamation = updatedReclamations.find(
+      (reclamation) => reclamation.id === selectedReclamation.id
+    );
+    setArchivedReclamations([...archivedReclamations, resolvedReclamation]);
+
+    // Clear the response and close the modal
+    setResponse('');
     onReplyClose();
+
+    // Show success toast
     toast({
       title: 'Réclamation résolue.',
       description: 'La réclamation a été marquée comme résolue et archivée.',
@@ -133,7 +136,9 @@ const GestionReclamations = () => {
       (filterStatus === 'Toutes' || reclamation.statut === filterStatus) &&
       (filterDate === '' || reclamation.date === filterDate) &&
       (reclamation.user.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        reclamation.user.prenom.toLowerCase().includes(searchTerm.toLowerCase()))
+        reclamation.user.prenom
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()))
     );
   });
 
